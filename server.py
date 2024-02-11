@@ -36,7 +36,7 @@ while True:
         for i in range(ch1.shape[1]):
             for j in range(ch1.shape[0]):
                 j=j+1900
-                message = f" {ch1[j][9]},{ch2[j][9]},{ch3[j][9]},{ch4[j][9]} "
+                message = f" {ch1[j][8]},{ch2[j][8]},{ch3[j][8]},{ch4[j][8]} "
                 client_socket.send(message.encode())
 
                 time.sleep(0.02)  # Optional delay to control the transmission rate

@@ -44,7 +44,17 @@ client_socket.connect((server_host, server_port))
 
 deviceName = 'Arduino4Ch'
     # Magic time
-    
+host2, port2 = "127.0.0.1", 25001
+
+
+server_socket2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Bind the socket to the host and port
+server_socket2.bind((host2, port2))
+
+# Listen for incoming connections
+server_socket2.listen(1)  # 1 is the maximum number of queued connections
+
 def RealtimePatRec_OneShot(src, event):
     global patRec, nTW, procT, handles, tempData, outVectorMotorLast
     num_columns = event['Data'].shape[1]
@@ -69,9 +79,13 @@ def RealtimePatRec_OneShot(src, event):
         # General routine for RealtimePatRec
         outMov, outVector, patRec = OneShotRealtimePatRec(tData, patRec)
         
-
-        #print(outMov)
+        print("data")
+        data = str(outMov)
         # Next cycle
+        print(data)
+        if data:
+            client_socket2, client_address2 = server_socket2.accept()
+            client_socket2.send(data.encode())
         nTW = nTW + 1
         
         # Finish of processing time

@@ -4,9 +4,11 @@ from ModelTraining import ModelTraining
 from Features import calculateWavelength
 from Features import zeroCrossingRate
 from Features import calculateAbsMean
+import time
 
 # Define x-axis values for the first 400 points
 time_values = np.arange(1, 36001)
+start_time = time.time()
 
 # Create the matrix for storing data
 k = 12600
@@ -51,4 +53,9 @@ for p in range(10):
             result_matrix[p][segment, i + 8] = calculateAbsMean(segment_data)
 
 # Printing the result matrix for the first class (change the index if needed)
-ModelTraining(result_matrix,4)
+ModelTraining(result_matrix)
+end_time = time.time()
+
+# Calculate and print the training time
+training_time = end_time - start_time
+print(f"Training time: {training_time} seconds")

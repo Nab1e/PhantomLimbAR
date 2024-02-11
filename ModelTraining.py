@@ -7,7 +7,7 @@ import joblib  # Import joblib for model persistence
 
 # Assuming 'result_matrix' is your list of NumPy arrays where each array represents a class.
 # 'result_matrix' should be a list of shape (31, 12) for 10 classes.
-def ModelTraining(result_matrix,n):
+def ModelTraining(result_matrix):
     # Initialize arrays to store features and labels from all classes.
     allFeatures = []
     allLabels = []
@@ -39,9 +39,8 @@ def ModelTraining(result_matrix,n):
     # Evaluate the model's performance by calculating accuracy
     accuracy = accuracy_score(testingLabels, predictedLabels)
     print(f'Accuracy: {accuracy * 100:.2f}%')
-    input_data = result_matrix[4][0].reshape(1, -1)
+    input_data = result_matrix[5][0].reshape(1, -1)
     outMov  = ldaModel.predict(input_data)
-    print("Predicted Labels:", outMov )
     joblib.dump(ldaModel, 'lda_model.pkl')
 
     return ldaModel
