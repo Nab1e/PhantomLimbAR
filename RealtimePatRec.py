@@ -87,6 +87,7 @@ def RealtimePatRec_OneShot(src, event):
             client_socket2, client_address2 = server_socket2.accept()
             client_socket2.send(data.encode())
         nTW = nTW + 1
+        print("newew")
         
         # Finish of processing time
         procT.append(time.time() - procTimeS)
